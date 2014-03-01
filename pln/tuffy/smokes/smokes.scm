@@ -24,109 +24,109 @@
 ;; Rules:
 
 (ImplicationLink (stv 0.5 1.0)
-	(EvaluationLink
+	(EvaluationLink (stv 1.0 1.0)
 	    smokes
 	    (ListLink
 	        (VariableNode "$X")))
-	(EvaluationLink
+	(EvaluationLink (stv 1.0 1.0)
 	    cancer
 	    (ListLink
 	        (VariableNode "$X"))))
 
 (ImplicationLink (stv 0.4 1.0)
-	(EvaluationLink
+	(EvaluationLink (stv 1.0 1.0)
 	    friends
 	    (ListLink
 	        (VariableNode "$X")
 	        (VariableNode "$Y")))
 	(ImplicationLink
-		(EvaluationLink
+		(EvaluationLink (stv 1.0 1.0)
 		    smokes
 		    (ListLink
 		        (VariableNode "$X")))
-		(EvaluationLink
+		(EvaluationLink (stv 1.0 1.0)
 		    smokes
 		    (ListLink
 		        (VariableNode "$Y")))))
 
 (ImplicationLink (stv 0.4 1.0)
-	(EvaluationLink
+	(EvaluationLink (stv 1.0 1.0)
 	    friends
 	    (ListLink
 	        (VariableNode "$X")
 	        (VariableNode "$Y")))
     (AndLink
 		(ImplicationLink
-		    (EvaluationLink
+		    (EvaluationLink (stv 1.0 1.0)
 				smokes
 				(ListLink
 				    (VariableNode "$X")))
-			(EvaluationLink
+			(EvaluationLink (stv 1.0 1.0)
 				smokes
 				(ListLink
 				    (VariableNode "$Y"))))
 		(ImplicationLink
-		    (EvaluationLink
+		    (EvaluationLink (stv 1.0 1.0)
 				smokes
 				(ListLink
 				    (VariableNode "$Y")))
-			(EvaluationLink
+			(EvaluationLink (stv 1.0 1.0)
 				smokes
 				(ListLink
 				    (VariableNode "$X"))))))
 
 ;;; evidence.db:
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
 	friends
 	(ListLink
 		Anna
 		Bob))
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
 	friends
 	(ListLink
 		Anna
 		Edward))
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
 	friends
 	(ListLink
 	    Anna
 		Frank))
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
 	friends
 	(ListLink
 		Edward
 		Frank))
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
 	friends
 	(ListLink
 		Gary
 		Helen))
 
 (NotLink
-    (EvaluationLink
+    (EvaluationLink (stv 1.0 1.0)
         friends
         (ListLink
             Gary
             Frank)))
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
     smokes
     (ListLink
         Anna))
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
     smokes
     (ListLink
         Edward))
 
 ;;; query.db:
 
-(EvaluationLink
+(EvaluationLink (stv 1.0 1.0)
     cancer
         (ListLink
             (VariableNode "$X")))
