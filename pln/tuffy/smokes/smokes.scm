@@ -171,7 +171,13 @@
 ;;; query.db
 
 ; Who has cancer?
-(EvaluationLink
-    cancer
+(define hasCancer
+    (EvaluationLink
+        cancer
         (ListLink
-        (VariableNode "$X")))
+            (VariableNode "$hasCancer"))))
+
+(EvaluationLink
+    (PredicateNode "query")
+    (ListLink
+        hasCancer))
