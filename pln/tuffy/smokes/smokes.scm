@@ -13,12 +13,12 @@
 (define smokes (PredicateNode "smokes"))
 (define cancer (PredicateNode "cancer"))
 
-(define Anna (ConceptNode "Anna"))
-(define Bob (ConceptNode "Bob"))
-(define Edward (ConceptNode "Edward"))
-(define Frank (ConceptNode "Frank"))
-(define Gary (ConceptNode "Gary"))
-(define Helen (ConceptNode "Helen"))
+(define Anna (ConceptNode "Anna" (stv 0.1667 1)))
+(define Bob (ConceptNode "Bob" stv (0.1667 1)))
+(define Edward (ConceptNode "Edward" (stv 0.1667 1)))
+(define Frank (ConceptNode "Frank" (stv 0.1667 1)))
+(define Gary (ConceptNode "Gary" (stv 0.1667 1)))
+(define Helen (ConceptNode "Helen" (stv 0.1667 1)))
 
 ;; Rules
 
