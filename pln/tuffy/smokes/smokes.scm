@@ -50,33 +50,6 @@
 		    (ListLink
 		        (VariableNode "$Y")))))
 
-; ?
-(ImplicationLink (stv 0.4 1.0)
-	(EvaluationLink (stv 1.0 1.0)
-	    friends
-	    (ListLink
-	        (VariableNode "$X")
-	        (VariableNode "$Y")))
-    (AndLink
-		(ImplicationLink
-		    (EvaluationLink (stv 1.0 1.0)
-				smokes
-				(ListLink
-				    (VariableNode "$X")))
-			(EvaluationLink (stv 1.0 1.0)
-				smokes
-				(ListLink
-				    (VariableNode "$Y"))))
-		(ImplicationLink
-		    (EvaluationLink (stv 1.0 1.0)
-				smokes
-				(ListLink
-				    (VariableNode "$Y")))
-			(EvaluationLink (stv 1.0 1.0)
-				smokes
-				(ListLink
-				    (VariableNode "$X"))))))
-
 ; If X and Y are friends, then Y and X are friends
 (EquivalenceLink (stv 1.0 1.0)
     (EvaluationLink (stv 1.0 1.0)
