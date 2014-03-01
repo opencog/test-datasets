@@ -14,7 +14,7 @@
 (define cancer (PredicateNode "cancer"))
 
 (define Anna (ConceptNode "Anna" (stv 0.1667 1)))
-(define Bob (ConceptNode "Bob" stv (0.1667 1)))
+(define Bob (ConceptNode "Bob" (stv 0.1667 1)))
 (define Edward (ConceptNode "Edward" (stv 0.1667 1)))
 (define Frank (ConceptNode "Frank" (stv 0.1667 1)))
 (define Gary (ConceptNode "Gary" (stv 0.1667 1)))
