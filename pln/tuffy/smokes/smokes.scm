@@ -24,31 +24,31 @@
 
 ; If X smokes, then X has cancer.
 (ImplicationLink (stv 0.5 1.0)
-	(EvaluationLink (stv 1.0 1.0)
-	    smokes
-	    (ListLink
-	        (VariableNode "$X")))
-	(EvaluationLink (stv 1.0 1.0)
-	    cancer
-	    (ListLink
-	        (VariableNode "$X"))))
+    (EvaluationLink (stv 1.0 1.0)
+        smokes
+        (ListLink
+            (VariableNode "$X")))
+    (EvaluationLink (stv 1.0 1.0)
+        cancer
+        (ListLink
+            (VariableNode "$X"))))
 
 ; In the case that X and Y are friends, if X smokes then so does Y.
 (ImplicationLink (stv 0.4 1.0)
-	(EvaluationLink (stv 1.0 1.0)
-	    friends
-	    (ListLink
-	        (VariableNode "$X")
-	        (VariableNode "$Y")))
-	(ImplicationLink
-		(EvaluationLink (stv 1.0 1.0)
-		    smokes
-		    (ListLink
-		        (VariableNode "$X")))
-		(EvaluationLink (stv 1.0 1.0)
-		    smokes
-		    (ListLink
-		        (VariableNode "$Y")))))
+    (EvaluationLink (stv 1.0 1.0)
+        friends
+        (ListLink
+            (VariableNode "$X")
+            (VariableNode "$Y")))
+    (ImplicationLink
+        (EvaluationLink (stv 1.0 1.0)
+            smokes
+            (ListLink
+                (VariableNode "$X")))
+        (EvaluationLink (stv 1.0 1.0)
+            smokes
+            (ListLink
+                (VariableNode "$Y")))))
 
 ; If X and Y are friends, then Y and X are friends.
 (EquivalenceLink (stv 1.0 1.0)
@@ -67,95 +67,95 @@
 
 ; Anna and Bob are friends.
 (EvaluationLink (stv 1.0 1.0)
-	friends
-	(ListLink
-		Anna
-		Bob))
+    friends
+    (ListLink
+        Anna
+        Bob))
 
 (EvaluationLink (stv 1.0 1.0)
-	friends
-	(ListLink
-		Anna
-		Edward))
+    friends
+    (ListLink
+        Anna
+        Edward))
 
 (EvaluationLink (stv 1.0 1.0)
-	friends
-	(ListLink
-	    Anna
-		Frank))
+    friends
+    (ListLink
+        Anna
+        Frank))
 
 (EvaluationLink (stv 1.0 1.0)
-	friends
-	(ListLink
-		Edward
-		Frank))
+    friends
+    (ListLink
+        Edward
+        Frank))
 
 (EvaluationLink (stv 1.0 1.0)
-	friends
-	(ListLink
-		Gary
-		Helen))
+    friends
+    (ListLink
+        Gary
+        Helen))
 
 ; Anna and Gary are not friends.
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Anna
-		Gary))
+    friends
+    (ListLink
+        Anna
+        Gary))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Anna
-		Helen))
+    friends
+    (ListLink
+        Anna
+        Helen))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Bob
-		Edward))
+    friends
+    (ListLink
+        Bob
+        Edward))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Bob
-		Frank))
+    friends
+    (ListLink
+        Bob
+        Frank))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Bob
-		Gary))
+    friends
+    (ListLink
+        Bob
+        Gary))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Bob
-		Helen))
+    friends
+    (ListLink
+        Bob
+        Helen))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Edward
-		Gary))
+    friends
+    (ListLink
+        Edward
+        Gary))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Edward
-		Helen))
+    friends
+    (ListLink
+        Edward
+        Helen))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Frank
-		Gary))
+    friends
+    (ListLink
+        Frank
+        Gary))
 
 (EvaluationLink (stv 0.0 1.0)
-	friends
-	(ListLink
-		Frank
-		Helen))
+    friends
+    (ListLink
+        Frank
+        Helen))
 
 ; Anna smokes.
 (EvaluationLink (stv 1.0 1.0)
@@ -174,4 +174,4 @@
 (EvaluationLink
     cancer
         (ListLink
-            (VariableNode "$X")))
+        (VariableNode "$X")))
