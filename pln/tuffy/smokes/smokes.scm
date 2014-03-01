@@ -5,7 +5,7 @@
 ;;; https://github.com/cosmoharrigan/tuffy/tree/master/samples/smoke
 ;;; http://hazy.cs.wisc.edu/hazy/tuffy/doc/tuffy-manual.pdf
 
-;;; prog.mln:
+;;; prog.mln
 
 ;; Evidence and query predicates and concepts:
 
@@ -20,7 +20,7 @@
 (define Gary (ConceptNode "Gary"))
 (define Helen (ConceptNode "Helen"))
 
-;; Rules:
+;; Rules
 
 ; If X smokes, then X has cancer.
 (ImplicationLink (stv 0.5 1.0)
@@ -33,7 +33,7 @@
 	    (ListLink
 	        (VariableNode "$X"))))
 
-; In the case that X and Y are friends, if X smokes, then Y smokes.
+; In the case that X and Y are friends, if X smokes then so does Y.
 (ImplicationLink (stv 0.4 1.0)
 	(EvaluationLink (stv 1.0 1.0)
 	    friends
@@ -50,7 +50,7 @@
 		    (ListLink
 		        (VariableNode "$Y")))))
 
-; If X and Y are friends, then Y and X are friends
+; If X and Y are friends, then Y and X are friends.
 (EquivalenceLink (stv 1.0 1.0)
     (EvaluationLink (stv 1.0 1.0)
         friends
@@ -63,8 +63,9 @@
             (VariableNode "$Y")
             (VariableNode "$X"))))
 
-;;; evidence.db:
+;;; evidence.db
 
+; Anna and Bob are friends.
 (EvaluationLink (stv 1.0 1.0)
 	friends
 	(ListLink
@@ -95,13 +96,68 @@
 		Gary
 		Helen))
 
-(NotLink (stv 1.0 1.0)
-    (EvaluationLink (stv 1.0 1.0)
-        friends
-        (ListLink
-            Gary
-            Frank)))
+; Anna and Gary are not friends.
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Anna
+		Gary))
 
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Anna
+		Helen))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Bob
+		Edward))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Bob
+		Frank))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Bob
+		Gary))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Bob
+		Helen))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Edward
+		Gary))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Edward
+		Helen))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Frank
+		Gary))
+
+(EvaluationLink (stv 0.0 1.0)
+	friends
+	(ListLink
+		Frank
+		Helen))
+
+; Anna smokes.
 (EvaluationLink (stv 1.0 1.0)
     smokes
     (ListLink
@@ -112,9 +168,10 @@
     (ListLink
         Edward))
 
-;;; query.db:
+;;; query.db
 
-(EvaluationLink (stv 1.0 1.0)
+; Who has cancer?
+(EvaluationLink
     cancer
         (ListLink
             (VariableNode "$X")))
