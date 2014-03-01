@@ -17,7 +17,6 @@
 (define Bob (ConceptNode "Bob"))
 (define Edward (ConceptNode "Edward"))
 (define Frank (ConceptNode "Frank"))
-(define Edward (ConceptNode "Edward"))
 (define Gary (ConceptNode "Gary"))
 (define Helen (ConceptNode "Helen"))
 
@@ -79,15 +78,15 @@
 				    (VariableNode "$X"))))))
 
 ; If X and Y are friends, then Y and X are friends
-(EquivalenceLink
-    (EvaluationLink
+(EquivalenceLink (stv 1.0 1.0)
+    (EvaluationLink (stv 1.0 1.0)
         friends
         (ListLink
             (VariableNode "$X")
             (VariableNode "$Y")))
-    (EvaluationLink
+    (EvaluationLink (stv 1.0 1.0)
         friends
-        (ListLink
+        (ListLink (stv 1.0 1.0)
             (VariableNode "$Y")
             (VariableNode "$X"))))
 
@@ -123,7 +122,7 @@
 		Gary
 		Helen))
 
-(NotLink
+(NotLink (stv 1.0 1.0)
     (EvaluationLink (stv 1.0 1.0)
         friends
         (ListLink
