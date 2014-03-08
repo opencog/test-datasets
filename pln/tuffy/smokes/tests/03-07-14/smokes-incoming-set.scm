@@ -1,59 +1,95 @@
-((EvaluationLink
-   (ConceptNode "Gary" (stv -nan 1))
+((EvaluationLink (stv 0.24027772 1)
+   (PredicateNode "smokes")
+   (ConceptNode "Frank" (stv 0.31780538 0.99999988))
+)
+ (EvaluationLink
+   (ConceptNode "Frank" (stv 0.31780538 0.99999988))
+   (PredicateNode "smokes")
+)
+ (EvaluationLink
+   (PredicateNode "smokes")
+   (ListLink
+      (MemberLink (stv 0.40723848 1)
+         (ConceptNode "Edward" (stv 0.28383794 1))
+         (ConceptNode "Helen" (stv 0.25158188 1))
+      )
+   )
+)
+ (EvaluationLink
+   (ConceptNode "Anna" (stv 0.25285152 1))
+   (PredicateNode "smokes")
+)
+ (EvaluationLink (stv 0.21017122 1)
+   (PredicateNode "smokes")
+   (ConceptNode "Anna" (stv 0.25285152 1))
+)
+ (EvaluationLink
+   (ConceptNode "cancer" (stv 0.25847664 1))
+   (PredicateNode "smokes")
+)
+ (EvaluationLink
+   (ConceptNode "Helen" (stv 0.25158188 1))
+   (PredicateNode "smokes")
+)
+ (EvaluationLink (stv 0.2540659 1)
+   (PredicateNode "smokes")
+   (ConceptNode "cancer" (stv 0.25847664 1))
+)
+ (EvaluationLink (stv 0.24966976 1)
+   (PredicateNode "smokes")
+   (ConceptNode "Helen" (stv 0.25158188 1))
+)
+ (EvaluationLink
+   (ConceptNode "Edward" (stv 0.28383794 1))
    (PredicateNode "smokes")
 )
  (EvaluationLink
    (ListLink
-      (ConceptNode "Gary" (stv -nan 1))
+      (ConceptNode "Frank" (stv 0.31780538 0.99999988))
    )
    (PredicateNode "smokes")
 )
- (EvaluationLink (stv -nan 1)
+ (EvaluationLink
+   (ListLink
+      (ConceptNode "Anna" (stv 0.25285152 1))
+   )
    (PredicateNode "smokes")
-   (ConceptNode "Gary" (stv -nan 1))
+)
+ (EvaluationLink (stv 0.34331959 1)
+   (PredicateNode "smokes")
+   (ConceptNode "Edward" (stv 0.28383794 1))
 )
  (EvaluationLink
-   (ConceptNode "Edward" (stv -nan -nan))
+   (ListLink
+      (ConceptNode "Helen" (stv 0.25158188 1))
+   )
    (PredicateNode "smokes")
 )
- (EvaluationLink
-   (ConceptNode "cancer" (stv -nan -nan))
-   (PredicateNode "smokes")
-)
- (EvaluationLink (stv -nan -nan)
-   (PredicateNode "smokes")
-   (ConceptNode "cancer" (stv -nan -nan))
-)
- (EvaluationLink (stv -nan -nan)
-   (PredicateNode "smokes")
-   (ConceptNode "Edward" (stv -nan -nan))
-)
- (EvaluationLink
-   (ConceptNode "Frank" (stv -nan -nan))
-   (PredicateNode "smokes")
-)
- (EvaluationLink (stv -nan -nan)
-   (PredicateNode "smokes")
-   (ConceptNode "Helen" (stv -nan -nan))
-)
- (EvaluationLink (stv -nan -nan)
-   (PredicateNode "smokes")
-   (ConceptNode "Frank" (stv -nan -nan))
-)
- (EvaluationLink
-   (ConceptNode "Helen" (stv -nan -nan))
-   (PredicateNode "smokes")
-)
- (EvaluationLink (stv 0.22712179 1)
+ (EvaluationLink (stv 1 0.99999982)
    (PredicateNode "smokes")
    (ListLink
-      (ConceptNode "Helen" (stv -nan -nan))
+      (VariableNode "$Y")
    )
 )
- (EvaluationLink (stv 0.2378359 1)
+ (EvaluationLink (stv 0.24029364 1)
    (PredicateNode "smokes")
    (ListLink
-      (ConceptNode "Gary" (stv -nan 1))
+      (ConceptNode "Frank" (stv 0.31780538 0.99999988))
+   )
+)
+ (NotLink
+   (PredicateNode "smokes")
+)
+ (EvaluationLink (stv 0.2415055 1)
+   (PredicateNode "smokes")
+   (ListLink
+      (ConceptNode "Helen" (stv 0.25158188 1))
+   )
+)
+ (EvaluationLink (stv 1 0.99999982)
+   (PredicateNode "smokes")
+   (ListLink
+      (VariableNode "$X")
    )
 )
  (EvaluationLink
@@ -64,80 +100,38 @@
 )
  (EvaluationLink
    (ListLink
-      (VariableNode "$Y")
-   )
-   (PredicateNode "smokes")
-)
- (EvaluationLink (stv 0.22506505 1)
-   (PredicateNode "smokes")
-   (ListLink
-      (ConceptNode "Frank" (stv -nan -nan))
-   )
-)
- (EvaluationLink
-   (ListLink
-      (ConceptNode "Edward" (stv -nan -nan))
-   )
-   (PredicateNode "smokes")
-)
- (EvaluationLink (stv 1 0.99999982)
-   (PredicateNode "smokes")
-   (ListLink
-      (VariableNode "$Y")
-   )
-)
- (EvaluationLink
-   (ListLink
-      (ConceptNode "Anna" (stv -nan -nan))
-   )
-   (PredicateNode "smokes")
-)
- (EvaluationLink (stv 1 0.99999982)
-   (PredicateNode "smokes")
-   (ListLink
-      (VariableNode "$X")
-   )
-)
- (EvaluationLink
-   (ConceptNode "Anna" (stv -nan -nan))
-   (PredicateNode "smokes")
-)
- (EvaluationLink
-   (ListLink
       (VariableNode "$X")
    )
    (PredicateNode "smokes")
 )
  (EvaluationLink
    (ListLink
-      (ConceptNode "Frank" (stv -nan -nan))
+      (ConceptNode "Edward" (stv 0.28383794 1))
    )
    (PredicateNode "smokes")
 )
- (EvaluationLink (stv -nan -nan)
+ (EvaluationLink
    (PredicateNode "smokes")
-   (ConceptNode "Anna" (stv -nan -nan))
+   (ListLink
+      (ConceptNode "Gary" (stv 0.16670001 0.99999982))
+   )
 )
  (EvaluationLink
    (ListLink
-      (ConceptNode "Helen" (stv -nan -nan))
+      (VariableNode "$Y")
    )
    (PredicateNode "smokes")
 )
- (NotLink
-   (PredicateNode "smokes")
-)
- (EvaluationLink (stv 0.23673752 1)
+ (EvaluationLink (stv 0.33423546 1)
    (PredicateNode "smokes")
    (ListLink
-      (ConceptNode "Edward" (stv -nan -nan))
+      (ConceptNode "Anna" (stv 0.25285152 1))
    )
 )
- (EvaluationLink (stv 0.2386785 1)
+ (EvaluationLink (stv 0.23751025 1)
    (PredicateNode "smokes")
    (ListLink
-      (ConceptNode "Anna" (stv -nan -nan))
+      (ConceptNode "Edward" (stv 0.28383794 1))
    )
 )
 )
-

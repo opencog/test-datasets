@@ -24,6 +24,8 @@
 
 ;; Rules
 
+;; If X smokes, then X has cancer.
+; Version #1
 (ImplicationLink (stv 0.5 1.0)
     (EvaluationLink (stv 1.0 1.0)
         smokes
@@ -34,22 +36,19 @@
         (ListLink
             (VariableNode "$X"))))
 
-; In the case that X and Y are friends, if X smokes then so does Y.
-(OrLink (stv 0.4 1.0)
-	(EvaluationLink (stv 0.0 1.0)
-		friends
-		(ListLink
-			(VariableNode "$X")
-			(VariableNode "$Y")))
-	(EvaluationLink (stv 0.0 1.0)
-		smokes
-		(ListLink
-			(VariableNode "$X")))
-	(EvaluationLink (stv 1.0 1.0)
-		smokes
-		(ListLink
-			(VariableNode "$Y"))))
+;; Version #2
+;(OrLink (stv 0.5 1.0)
+;    (EvaluationLink (stv 0.0 1.0)
+;        smokes
+;        (ListLink
+;            (VariableNode "$X")))
+;    (EvaluationLink (stv 1.0 1.0)
+;        cancer
+;        (ListLink
+;            (VariableNode "$X"))))
 
+; In the case that X and Y are friends, if X smokes then so does Y.
+; Version #1
 (ImplicationLink (stv 0.4 1.0)
     (EvaluationLink (stv 1.0 1.0)
         friends
@@ -65,6 +64,36 @@
             smokes
             (ListLink
                 (VariableNode "$Y")))))
+
+;; Version #2
+;(OrLink (stv 0.4 1.0)
+;    (EvaluationLink (stv 0.0 1.0)
+;        friends
+;        (ListLink
+;            (VariableNode "$X")
+;            (VariableNode "$Y")))
+;    (EvaluationLink (stv 0.0 1.0)
+;        smokes
+;        (ListLink
+;            (VariableNode "$X")))
+;    (EvaluationLink (stv 1.0 1.0)
+;        smokes
+;        (ListLink
+;            (VariableNode "$Y"))))
+
+
+; If X and Y are friends, then Y and X are friends.
+(EquivalenceLink (stv 1.0 1.0)
+    (EvaluationLink (stv 1.0 1.0)
+        friends
+        (ListLink
+            (VariableNode "$X")
+            (VariableNode "$Y")))
+    (EvaluationLink (stv 1.0 1.0)
+        friends
+        (ListLink (stv 1.0 1.0)
+            (VariableNode "$Y")
+            (VariableNode "$X"))))
 
 ;;; evidence.db
 
