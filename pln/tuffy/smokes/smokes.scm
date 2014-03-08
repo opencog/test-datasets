@@ -7,6 +7,8 @@
 
 ;;; prog.mln
 
+(cog-set-af-boundary! 1)
+
 ;; Evidence and query predicates and concepts:
 
 (define friends (PredicateNode "friends"))
@@ -22,7 +24,8 @@
 
 ;; Rules
 
-; If X smokes, then X has cancer.
+;; If X smokes, then X has cancer.
+; Version #1
 (ImplicationLink (stv 0.5 1.0)
     (EvaluationLink (stv 1.0 1.0)
         smokes
@@ -33,7 +36,19 @@
         (ListLink
             (VariableNode "$X"))))
 
+;; Version #2
+;(OrLink (stv 0.5 1.0)
+;    (EvaluationLink (stv 0.0 1.0)
+;        smokes
+;        (ListLink
+;            (VariableNode "$X")))
+;    (EvaluationLink (stv 1.0 1.0)
+;        cancer
+;        (ListLink
+;            (VariableNode "$X"))))
+
 ; In the case that X and Y are friends, if X smokes then so does Y.
+; Version #1
 (ImplicationLink (stv 0.4 1.0)
     (EvaluationLink (stv 1.0 1.0)
         friends
@@ -49,6 +64,23 @@
             smokes
             (ListLink
                 (VariableNode "$Y")))))
+
+;; Version #2
+;(OrLink (stv 0.4 1.0)
+;    (EvaluationLink (stv 0.0 1.0)
+;        friends
+;        (ListLink
+;            (VariableNode "$X")
+;            (VariableNode "$Y")))
+;    (EvaluationLink (stv 0.0 1.0)
+;        smokes
+;        (ListLink
+;            (VariableNode "$X")))
+;    (EvaluationLink (stv 1.0 1.0)
+;        smokes
+;        (ListLink
+;            (VariableNode "$Y"))))
+
 
 ; If X and Y are friends, then Y and X are friends.
 (EquivalenceLink (stv 1.0 1.0)
@@ -171,7 +203,26 @@
 ;;; query.db
 
 ; Who has cancer?
-(EvaluationLink
-    cancer
+(define hasCancer
+    (EvaluationLink
+        cancer
         (ListLink
-        (VariableNode "$X")))
+            (VariableNode "$hasCancer"))))
+
+(define query
+    (EvaluationLink
+        (PredicateNode "query")
+        (ListLink
+            hasCancer)))
+
+(define rules
+    (EvaluationLink
+        (PredicateNode "rules")
+        (ListLink
+            (ConceptNode "DeductionRule")
+            (ConceptNode "EvaluationToMemberRule")
+            (ConceptNode "MemberToEvaluationRule")
+            (ConceptNode "MemberToInheritanceRule")
+            (ConceptNode "InheritanceToMemberRule"))))
+
+(cog-set-av! cancer (av 1000 0 0))
