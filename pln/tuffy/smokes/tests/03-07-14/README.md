@@ -1,15 +1,17 @@
-March 7, 2014
+**March 7, 2014**
 
 Testing a PLN version of the Tuffy MLN "smokes" sample.
 
 More details on this sample are available here:
-https://github.com/cosmoharrigan/tuffy/tree/master/samples/smoke
-http://hazy.cs.wisc.edu/hazy/tuffy/doc/tuffy-manual.pdf
+
+- https://github.com/cosmoharrigan/tuffy/tree/master/samples/smoke
+- http://hazy.cs.wisc.edu/hazy/tuffy/doc/tuffy-manual.pdf
 
 The current test is intended to check the inference activity of PLN for correctness. The Inference History Repository was enabled to store inferences in the main atomspace.
 
 The following subset of rules and link types were chosen for the forward chaining agent:
 
+```
 rules.DeductionRule
 rules.InversionRule
 rules.ModusPonensRule
@@ -27,7 +29,9 @@ rules.OrEvaluationRule
 rules.SimilarityRule
 rules.SubsetEvaluationRule
 rules.AndEvaluationRule
+```
 
+```
 types.InheritanceLink
 types.EvaluationLink
 types.ImplicationLink
@@ -47,3 +51,4 @@ types.MemberLink
 types.NotLink
 types.FalseLink
 types.TrueLink
+```
