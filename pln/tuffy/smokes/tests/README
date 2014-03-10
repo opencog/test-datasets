@@ -1,0 +1,11 @@
+- Create a subfolder with the date of the test
+- 'cd' into the subfolder
+- Run the tests:
+    ../run.sh
+
+- After a while, record the output:
+    ../atomspace.sh
+    ../history.sh
+    ../cancer.sh
+    ../friends.sh
+    ../smokes.sh
