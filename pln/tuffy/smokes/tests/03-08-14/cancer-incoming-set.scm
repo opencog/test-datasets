@@ -1,5 +1,4 @@
-[0;32mopencog[1;32m> [0mEntering scheme shell; use ^D or a single . on a line by itself to exit.
-[0;34mguile[1;34m> [0m((EvaluationLink
+((EvaluationLink
    (ConceptNode "Gary" (stv -nan 1))
    (PredicateNode "cancer" (av 1000 0 0))
 )
@@ -149,4 +148,3 @@
    )
 )
 )
-[0;34mguile[1;34m> [0m
