@@ -2,7 +2,10 @@ Instructions to run the experiment:
 
 - Create a subfolder with the date of the test
 - 'cd' into the subfolder
-- Ensure that the smokes.scm datafile is preloaded in your opencog.conf file
+- Ensure that this datafile is preloaded in your opencog.conf file:
+```
+test-datasets/pln/tuffy/smokes/smokes.scm```
+```
 - Start the cogserver
 - Run the tests:
     ../run.sh
