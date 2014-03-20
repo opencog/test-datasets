@@ -25,6 +25,8 @@
 ;; Rules
 
 ;; If X smokes, then X has cancer.
+;; ForAll(x) Smokes(x) -> Cancer(x)
+
 ; Version #1
 (ImplicationLink (stv 0.5 1.0)
     (EvaluationLink (stv 1.0 0.0)
@@ -36,53 +38,35 @@
         (ListLink
             (VariableNode "$X"))))
 
-;; Version #2
-;(OrLink (stv 0.5 1.0)
-;    (NotLink
-;        (EvaluationLink (stv 1.0 0.0)
-;            smokes
-;            (ListLink
-;                (VariableNode "$X"))))
-;    (EvaluationLink (stv 1.0 0.0)
-;        cancer
-;        (ListLink
-;            (VariableNode "$X"))))
+;; In the case that X and Y are friends, if X smokes then so does Y.
+;; ForAll(x,y) Friends(x,y) -> (Smokes(x) <-> Smokes(y))
 
-; In the case that X and Y are friends, if X smokes then so does Y.
-; Version #1
+; Version #3
 (ImplicationLink (stv 0.4 1.0)
     (EvaluationLink (stv 1.0 0.0)
         friends
         (ListLink
             (VariableNode "$X")
             (VariableNode "$Y")))
-    (ImplicationLink
-        (EvaluationLink (stv 1.0 0.0)
-            smokes
-            (ListLink
-                (VariableNode "$X")))
-        (EvaluationLink (stv 1.0 0.0)
-            smokes
-            (ListLink
-                (VariableNode "$Y")))))
-
-;; Version #2
-;(OrLink (stv 0.4 1.0)
-;    (NotLink
-;        (EvaluationLink (stv 1.0 0.0)
-;            friends
-;            (ListLink
-;                (VariableNode "$X")
-;                (VariableNode "$Y"))))
-;    (NotLink
-;        (EvaluationLink (stv 1.0 0.0)
-;            smokes
-;            (ListLink
-;                (VariableNode "$X"))))
-;    (EvaluationLink (stv 1.0 0.0)
-;        smokes
-;        (ListLink
-;            (VariableNode "$Y"))))
+    (AndLink
+        (ImplicationLink
+            (EvaluationLink (stv 1.0 0.0)
+                smokes
+                (ListLink
+                    (VariableNode "$X")))
+            (EvaluationLink (stv 1.0 0.0)
+                smokes
+                (ListLink
+                    (VariableNode "$Y"))))
+        (ImplicationLink
+            (EvaluationLink (stv 1.0 0.0)
+                smokes
+                (ListLink
+                    (VariableNode "$Y")))
+            (EvaluationLink (stv 1.0 0.0)
+                smokes
+                (ListLink
+                    (VariableNode "$X"))))))
 
 ; If X and Y are friends, then Y and X are friends.
 (EquivalenceLink (stv 1.0 1.0)
@@ -130,66 +114,7 @@
         Gary
         Helen))
 
-; Anna and Gary are not friends.
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Anna
-        Gary))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Anna
-        Helen))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Bob
-        Edward))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Bob
-        Frank))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Bob
-        Gary))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Bob
-        Helen))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Edward
-        Gary))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Edward
-        Helen))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Frank
-        Gary))
-
-(EvaluationLink (stv 0.0 1.0)
-    friends
-    (ListLink
-        Frank
-        Helen))
+;; Note: the 'non-friendships' are not explicitly defined in this version of the file
 
 ; Anna smokes.
 (EvaluationLink (stv 1.0 1.0)
