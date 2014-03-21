@@ -54,4 +54,12 @@ The program describing the rules is contained in: **prog.scm**
   the set of papers?
 
 - How should negation be handled? With an explicit separate ```!category```
-  predicate, or with ```NotLink```?
+  predicate, or with ```NotLink```? If it's with a separate predicate, what
+  is the proper atomspace syntax of the relation between it and its inverse
+  predicate?
+
+- How to map MLN rule weights to PLN truth values?
+
+- How to assign node probabilities?
+
+- Define the remaining rules in prog.scm

@@ -22,6 +22,12 @@
 ; category(paper,cat)
 (define category (PredicateNode "category"))
 
+;; Define the negation predicate to the hidden predicate
+
+(define notCategory (PredicateNode "!category"))
+
+;; TODO: How to express the negation relationship between the two predicates?
+
 ;; Rules
 
 ; Note: Tuffy required rules to be specified in clausal normal form
@@ -132,58 +138,53 @@
 
 ; Rule #6
 ; ----------------------------------------------------------------------------
+; 0.09  category(a1,Operating_Systems)
 
 
 
 ; Rule #7
 ; ----------------------------------------------------------------------------
-; 0.09  category(a1,Operating_Systems)
+; 0.04  category(a1,Hardware_and_Architecture)
 
 
 
 ; Rule #8
 ; ----------------------------------------------------------------------------
-; 0.04  category(a1,Hardware_and_Architecture)
+; 0.11  category(a1,Data_Structures__Algorithms_and_Theory)
 
 
 
 ; Rule #9
 ; ----------------------------------------------------------------------------
-; 0.11  category(a1,Data_Structures__Algorithms_and_Theory)
+; 0.04  category(a1,Encryption_and_Compression)
 
 
 
 ; Rule #10
 ; ----------------------------------------------------------------------------
-; 0.04  category(a1,Encryption_and_Compression)
+; 0.02  category(a1,Information_Retrieval)
 
 
 
 ; Rule #11
 ; ----------------------------------------------------------------------------
-; 0.02  category(a1,Information_Retrieval)
+; 0.05  category(a1,Databases)
 
 
 
 ; Rule #12
 ; ----------------------------------------------------------------------------
-; 0.05  category(a1,Databases)
+; 0.39  category(a1,Artificial_Intelligence)
 
 
 
 ; Rule #13
 ; ----------------------------------------------------------------------------
-; 0.39  category(a1,Artificial_Intelligence)
-
-
-
-; Rule #14
-; ----------------------------------------------------------------------------
 ; 0.06  category(a1,Human_Computer_Interaction)
 
 
 
-; Rule #15
+; Rule #14
 ; ----------------------------------------------------------------------------
 ; TODO: (see note on rule #4)
 ; 0.06  category(a,Networking)
