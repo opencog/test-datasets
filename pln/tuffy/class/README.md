@@ -1,7 +1,8 @@
 PLN version of the Tuffy MLN "Relational Classification" dataset
 ----------------------------------------------------------------
 
-More details on this sample are available here:
+This dataset was the example used in the Tuffy paper. Details about the
+dataset are available in the following links:
 
 - https://github.com/cosmoharrigan/tuffy/tree/master/samples/class
 - http://arxiv.org/pdf/1104.3216.pdf
@@ -39,7 +40,6 @@ The program describing the rules is contained in: **prog.scm**
   (MemberLink
       (ConceptNode "Paper2")
       (ConceptNode "Paper"))
-    etc...
 ```
 
 - And then, during the assignment of constants to variables to create ground
