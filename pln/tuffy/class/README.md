@@ -63,3 +63,6 @@ The program describing the rules is contained in: **prog.scm**
 - How to assign node probabilities?
 
 - Define the remaining rules in prog.scm
+
+- In rules 4 to 14 in **prog.scm**, why does 'Networking' appear twice, and 
+  what is the meaning of the letter 'a' instead of 'a1'?
