@@ -119,7 +119,7 @@
         (PredicateNode "category")
         (ListLink
             (VariableNode "$Paper2")
-            (VariableNode "$Category2")))))
+            (VariableNode "$Category1")))))
 
 ; Rule #3
 ; ----------------------------------------------------------------------------
