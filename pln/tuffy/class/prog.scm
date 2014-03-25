@@ -7,6 +7,7 @@
 ;;; http://arxiv.org/pdf/1104.3216.pdf
 
 ;; Observed predicates
+;; ---------------------------------------------------------------------------
 
 ; *wrote(person,paper)
 (define wrote (PredicateNode "wrote"))
@@ -23,18 +24,35 @@
 (define category (PredicateNode "category"))
 
 ;; Define the negation predicate to the hidden predicate
-
+;; TODO: How to express the negation relationship between the two predicates?
+;;       We were going to use NotLink instead, but there is an outstanding
+;;       bug with the ModusPonensFormula that will cause nonsensical results:
+;;         https://github.com/opencog/opencog/issues/598
 (define notCategory (PredicateNode "!category"))
 
-;; TODO: How to express the negation relationship between the two predicates?
+; TODO: Test if this relationship between Category and NotCategory works as
+;       expected
+(ImplicationLink (stv 1 1)
+    (EvaluationLink
+        (PredicateNode "!category")
+        (ListLink
+            (VariableNode "$X")
+            (VariableNode "$Y")))
+    (NotLink
+        (EvaluationLink
+            (PredicateNode "category")
+            (ListLink
+                (VariableNode "$X")
+                (VariableNode "$Y")))))
 
 ;; Rules
+;; ---------------------------------------------------------------------------
 
 ; Note: Tuffy required rules to be specified in clausal normal form
 ; (a disjunction of positive or negative literals). However, I find
 ; clausal form to be harder to read than propositional formulae.
 ;
-; Therefore, I have attempted to include both versions below.
+; Therefore, I have attempted to demonstrate both versions below.
 
 ; Rule #1
 ; ----------------------------------------------------------------------------
@@ -47,9 +65,7 @@
 ;   Paper_1 is in Category
 ;   then Paper_2 is probably also in Category
 
-; TODO: Need to assign TruthValue to the rule below based on rule weight of 1
-
-(ImplicationLink
+(ImplicationLink (stv .73106 1)
     (AndLink
         (EvaluationLink
             (PredicateNode "wrote")
@@ -83,11 +99,11 @@
 ; Note: the prog.mln file contains this as the following two rules:
 ;   2  !refers(a1,a2) v category(a2,a3) v !category(a1,a3)
 ;   2  !refers(a1,a2) v category(a1,a3) v !category(a2,a3)
-; But, isn't the following representation sufficient?
+; But, isn't the following representation sufficient? And if so, how should
+; those two rule weights of '2' be combined? Should the probability be based
+; on a rule weight of '2' or of '4'?
 
-; TODO: Need to assign TruthValue to the rule below based on rule weight of 2
-
-(ImplicationLink
+(ImplicationLink (stv 0.88080 1)
     (AndLink
         (EvaluationLink
             (PredicateNode "category")
@@ -105,9 +121,6 @@
             (VariableNode "$Paper2")
             (VariableNode "$Category2")))))
 
-; ****************************************************************************
-; TODO - define the following rules:
-
 ; Rule #3
 ; ----------------------------------------------------------------------------
 ; 10  sameCat(a2,a3) v !category(a1,a3) v !category(a1,a2)
@@ -120,7 +133,44 @@
 ;   paper_1 is not in category_1 OR
 ;   paper_1 is not in category_2
 
+; TODO: Should we use an ImplicationLink or clausal normal form?
 
+;(OrLink (stv 0.99995 1)
+;    (EvaluationLink
+;        (PredicateNode "sameCat")
+;        (ListLink
+;            (VariableNode "$Y1")
+;            (VariableNode "$Y2")))
+;    (NotLink
+;        (EvaluationLink
+;            (PredicateNode "category")
+;            (ListLink
+;                (VariableNode "$X")
+;                (VariableNode "$Y1"))))
+;    (NotLink
+;        (EvaluationLink
+;            (PredicateNode "category")
+;            (ListLink
+;                (VariableNode "$X")
+;                (VariableNode "$Y2"))))
+
+(ImplicationLink (stv 0.99995 1)
+    (AndLink
+        (EvaluationLink
+            (PredicateNode "category")
+            (ListLink
+                (VariableNode "$X")
+                (VariableNode "$Y1")))
+        (EvaluationLink
+            (PredicateNode "category")
+            (ListLink
+                (VariableNode "$X")
+                (VariableNode "$Y2"))))
+    (EvaluationLink
+        (PredicateNode "sameCat")
+        (ListLink
+            (VariableNode "$Y1")
+            (VariableNode "$Y2"))))
 
 ; Rule #4
 ; ----------------------------------------------------------------------------
@@ -128,65 +178,95 @@
 ;       letter 'a' instead of 'a1'?
 ; -3  category(a,Networking)
 
+; TODO: Define this rule. It doesn't make sense to define the 'Networking'
+; strength twice. How should this alter the overall probability?
 
+; ****************************************************************************
+; TODO: Why did they have the following rule weights add up to 1? That might
+; make sense if the rule weights were probabilities, but they're not. They have
+; to be converted to probabilities.
+;
+; For now, we'll just go ahead and use them as probabilities, and they can be
+; adjusted later if necessary.
+; ****************************************************************************
 
 ; Rule #5
 ; ----------------------------------------------------------------------------
 ; 0.14  category(a1,Programming)
 
+; Programming is a fuzzy member of degree 0.14 of the categories that papers have
+(MemberLink (stv 0.14 1)
+    (ConceptNode "Programming")
+    (SatisfyingSetLink
+        (VariableNode "$Y")
+        (EvaluationLink
+            (PredicateNode "category")
+            (ListLink
+                (VariableNode "$X")
+                (VariableNode "$Y")))))
 
+; Define that as a macro so that we can re-use it without typing it again
+
+(define CategoriesThatPapersHave
+    (SatisfyingSetLink
+            (VariableNode "$Y")
+            (EvaluationLink
+                (PredicateNode "category")
+                (ListLink
+                    (VariableNode "$X")
+                    (VariableNode "$Y")))))
 
 ; Rule #6
 ; ----------------------------------------------------------------------------
 ; 0.09  category(a1,Operating_Systems)
-
-
+(MemberLink (stv 0.09 1)
+    CategoriesThatPapersHave)
 
 ; Rule #7
 ; ----------------------------------------------------------------------------
 ; 0.04  category(a1,Hardware_and_Architecture)
-
-
+(MemberLink (stv 0.04 1)
+    CategoriesThatPapersHave)
 
 ; Rule #8
 ; ----------------------------------------------------------------------------
 ; 0.11  category(a1,Data_Structures__Algorithms_and_Theory)
-
-
+(MemberLink (stv 0.11 1)
+    CategoriesThatPapersHave)
 
 ; Rule #9
 ; ----------------------------------------------------------------------------
 ; 0.04  category(a1,Encryption_and_Compression)
-
-
+(MemberLink (stv 0.04 1)
+    CategoriesThatPapersHave)
 
 ; Rule #10
 ; ----------------------------------------------------------------------------
 ; 0.02  category(a1,Information_Retrieval)
-
-
+(MemberLink (stv 0.02 1)
+    CategoriesThatPapersHave)
 
 ; Rule #11
 ; ----------------------------------------------------------------------------
 ; 0.05  category(a1,Databases)
-
-
+(MemberLink (stv 0.05 1)
+    CategoriesThatPapersHave)
 
 ; Rule #12
 ; ----------------------------------------------------------------------------
 ; 0.39  category(a1,Artificial_Intelligence)
-
-
+(MemberLink (stv 0.39 1)
+    CategoriesThatPapersHave)
 
 ; Rule #13
 ; ----------------------------------------------------------------------------
 ; 0.06  category(a1,Human_Computer_Interaction)
-
-
+(MemberLink (stv 0.06 1)
+    CategoriesThatPapersHave)
 
 ; Rule #14
 ; ----------------------------------------------------------------------------
 ; TODO: (see note on rule #4)
 ; 0.06  category(a,Networking)
-
-
+(MemberLink (stv 0.06 1)
+    CategoriesThatPapersHave)

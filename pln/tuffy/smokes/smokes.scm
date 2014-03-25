@@ -26,9 +26,11 @@
 
 ;; If X smokes, then X has cancer.
 ;; ForAll(x) Smokes(x) -> Cancer(x)
+; MLN Rule Weight: 0.5
+; Approximate probability: 0.6225
 
 ; Version #1
-(ImplicationLink (stv 0.5 1.0)
+(ImplicationLink (stv 0.6225 1.0)
     (EvaluationLink (stv 1.0 0.0)
         smokes
         (ListLink
@@ -40,9 +42,11 @@
 
 ;; In the case that X and Y are friends, if X smokes then so does Y.
 ;; ForAll(x,y) Friends(x,y) -> (Smokes(x) <-> Smokes(y))
+; MLN Rule Weight: 0.4
+; Approximate probability: 0.5987
 
 ; Version #3
-(ImplicationLink (stv 0.4 1.0)
+(ImplicationLink (stv 0.5987 1.0)
     (EvaluationLink (stv 1.0 0.0)
         friends
         (ListLink
