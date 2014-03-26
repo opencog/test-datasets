@@ -14,9 +14,11 @@ Instructions to run the experiment:
 
 - Ensure that this datafile is preloaded in your opencog.conf file under SCM_PRELOAD: ```test-datasets/pln/tuffy/class/prog.mln```
 
-- Ensure that this datafile is preloaded in your opencog.conf file under SCM_PRELOAD: ```test-datasets/pln/tuffy/class/evidence.mln```
-
 - Ensure that this PLN experiment is in the python extension path in your opencog.conf file under PYTHON_EXTENSION_DIRS: ```../opencog/python/pln/examples/tuffy/class```
+
+- Ensure that you have configured OpenCog to work with PostgreSQL and ODBC following the instructions here: https://github.com/opencog/opencog/blob/master/opencog/persist/sql/README
+
+- Import the database dump in PostgreSQL from the ```evidence-notlink.sql``` file
 
 - Start the Logger application (from the ```external-tools``` repository) to capture AtomSpace events and store them in MongoDB for later analysis
 
