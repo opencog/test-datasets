@@ -56,28 +56,34 @@
 ;   then Paper_2 is probably also in Category
 ; ============================================================================
 
-(ImplicationLink (stv .73106 1)
+(define rule1_antecedent
     (AndLink
-        (EvaluationLink
-            (PredicateNode "wrote")
-            (ListLink
-                (VariableNode "$Person1")
-                (VariableNode "$Paper1")))
-        (EvaluationLink
-            (PredicateNode "wrote")
-            (ListLink
-                (VariableNode "$Person1")
-                (VariableNode "$Paper2")))
-        (EvaluationLink
+            (EvaluationLink
+                (PredicateNode "wrote")
+                (ListLink
+                    (VariableNode "$Person1")
+                    (VariableNode "$Paper1")))
+            (EvaluationLink
+                (PredicateNode "wrote")
+                (ListLink
+                    (VariableNode "$Person1")
+                    (VariableNode "$Paper2")))
+            (EvaluationLink
+                (PredicateNode "category")
+                (ListLink
+                    (VariableNode "$Paper1")
+                    (VariableNode "$Category")))))
+
+(define rule1_consequent
+    (EvaluationLink
             (PredicateNode "category")
             (ListLink
-                (VariableNode "$Paper1")
+                (VariableNode "$Paper2")
                 (VariableNode "$Category"))))
-    (EvaluationLink
-        (PredicateNode "category")
-        (ListLink
-            (VariableNode "$Paper2")
-            (VariableNode "$Category"))))
+
+(ImplicationLink (stv .73106 1)
+    rule1_antecedent
+    rule1_consequent)
 
 ; ============================================================================
 ; Rule #2
@@ -96,23 +102,29 @@
 ; on a rule weight of '2' or of '4'?
 ; ============================================================================
 
-(ImplicationLink (stv 0.88080 1)
+(define rule2_antecedent
     (AndLink
-        (EvaluationLink
+            (EvaluationLink
+                (PredicateNode "category")
+                (ListLink
+                    (VariableNode "$Paper1")
+                    (VariableNode "$Category1")))
+            (EvaluationLink
+                (PredicateNode "refers")
+                (ListLink
+                    (VariableNode "$Paper1")
+                    (VariableNode "$Paper2")))))
+
+(define rule2_consequent
+    (EvaluationLink
             (PredicateNode "category")
             (ListLink
-                (VariableNode "$Paper1")
-                (VariableNode "$Category1")))
-        (EvaluationLink
-            (PredicateNode "refers")
-            (ListLink
-                (VariableNode "$Paper1")
-                (VariableNode "$Paper2")))
-    (EvaluationLink
-        (PredicateNode "category")
-        (ListLink
-            (VariableNode "$Paper2")
-            (VariableNode "$Category1")))))
+                (VariableNode "$Paper2")
+                (VariableNode "$Category1"))))
+
+(ImplicationLink (stv 0.88080 1)
+    rule2_antecedent
+    rule2_consequent)
 
 ; ============================================================================
 ; Rule #3
@@ -147,23 +159,29 @@
 ;            (PredicateNode "category")
 ;            (ListLink
 ;                (VariableNode "$X")
-;                (VariableNode "$Y2"))))
+;                (VariableNode "$Y2")))))
 ; ============================================================================
 
-(ImplicationLink (stv 0.99995 1)
+(define rule3_antecedent
     (AndLink
-        (EvaluationLink
-            (PredicateNode "category")
-            (ListLink
-                (VariableNode "$X")
-                (VariableNode "$Y1")))
-        (EvaluationLink
-            (PredicateNode "category")
-            (ListLink
-                (VariableNode "$X")
-                (VariableNode "$Y2"))))
+            (EvaluationLink
+                (PredicateNode "category")
+                (ListLink
+                    (VariableNode "$X")
+                    (VariableNode "$Y1")))
+            (EvaluationLink
+                (PredicateNode "category")
+                (ListLink
+                    (VariableNode "$X")
+                    (VariableNode "$Y2")))))
+
+(define rule3_consequent
     (EvaluationLink
-        (PredicateNode "sameCat")
-        (ListLink
-            (VariableNode "$Y1")
-            (VariableNode "$Y2"))))
+            (PredicateNode "sameCat")
+            (ListLink
+                (VariableNode "$Y1")
+                (VariableNode "$Y2"))))
+
+(ImplicationLink (stv 0.99995 1)
+    rule3_antecedent
+    rule3_consequent)
