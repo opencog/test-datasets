@@ -7,16 +7,22 @@
 ;;; http://arxiv.org/pdf/1104.3216.pdf
 
 ;; ===========================================================================
+;; Configuration
+;; ===========================================================================
+
+(cog-set-af-boundary! 25)
+
+;; ===========================================================================
 ;; Observed predicates
 ;; ===========================================================================
 
 ; *wrote(person,paper)
 
-(define wrote (PredicateNode "wrote"))
+(define wrote (PredicateNode "wrote" (av 20000 0 0)))
 
 ; *refers(paper,paper)
 
-(define refers (PredicateNode "refers"))
+(define refers (PredicateNode "refers" (av 20000 0 0)))
 
 ; *sameCat(cat,cat)
 
@@ -32,16 +38,18 @@
 
 ; List of categories:
 
-(ConceptNode "Programming")
-(ConceptNode "Operating_Systems")
-(ConceptNode "Hardware_and_Architecture")
-(ConceptNode "Data_Structures__Algorithms_and_Theory")
-(ConceptNode "Encryption_and_Compression")
-(ConceptNode "Information_Retrieval")
-(ConceptNode "Databases")
-(ConceptNode "Artificial_Intelligence")
-(ConceptNode "Human_Computer_Interaction")
-(ConceptNode "Networking")
+(define category-av (av 0 0 0))
+
+(ConceptNode "Programming" category-av)
+(ConceptNode "Operating_Systems" category-av)
+(ConceptNode "Hardware_and_Architecture" category-av)
+(ConceptNode "Data_Structures__Algorithms_and_Theory" category-av)
+(ConceptNode "Encryption_and_Compression" category-av)
+(ConceptNode "Information_Retrieval" category-av)
+(ConceptNode "Databases" category-av)
+(ConceptNode "Artificial_Intelligence" category-av)
+(ConceptNode "Human_Computer_Interaction" category-av)
+(ConceptNode "Networking" category-av)
 
 ;; TODO: In this version, we will attempt to use NotLink to express negation
 ;;       of a predicate
