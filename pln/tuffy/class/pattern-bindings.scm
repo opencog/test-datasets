@@ -219,6 +219,7 @@
 ;
 ; Matches with rule #2 in prog.scm
 ; Takes paper2 as argument. The other 2 variables are ungrounded.
+; Returns a list of papers.
 
 (define (find-referrals-to-paper paper2)
   (cog-bind
@@ -245,6 +246,7 @@
 ;
 ; Matches with rule #1 in prog.scm
 ; Takes paper2 as argument. The other 3 variables are ungrounded.
+; Returns a list of papers.
 
 (define (find-common-author-to-paper paper2)
   (cog-bind
