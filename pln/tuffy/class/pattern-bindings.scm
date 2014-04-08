@@ -10,6 +10,12 @@
 ;;     referral-sources
 ;;     referral-targets
 ;;     categorizations
+;;
+;; Additionally, these find-* queries are defined to assist in variable
+;; guided chaining:
+;;
+;;     find-referrals-to-paper
+;;     find-common-author-to-paper
 
 ; ---------------------------------------------------------------------------
 ; find-categories
@@ -207,3 +213,61 @@
         (cog-outgoing-set (cog-bind find-categorizations-result))))
 
 (define (count-categorizations) (length (find-categorizations)))
+
+; ---------------------------------------------------------------------------
+; find-referrals-to-paper
+;
+; Matches with rule #2 in prog.scm
+; Takes paper2 as argument. The other 2 variables are ungrounded.
+
+(define (find-referrals-to-paper paper2)
+  (cog-bind
+      (BindLink
+        (ListLink
+            (VariableNode "$paper1")
+            (VariableNode "$category"))
+        (ImplicationLink
+          (AndLink
+              (EvaluationLink
+                (PredicateNode "refers")
+                (ListLink
+                  (VariableNode "$paper1")
+                  paper2))
+              (EvaluationLink
+                (PredicateNode "category")
+                (ListLink
+                    (VariableNode "$paper1")
+                    (VariableNode "$category"))))
+          (VariableNode "$paper1")))))
+
+; ---------------------------------------------------------------------------
+; find-common-author-to-paper
+;
+; Matches with rule #1 in prog.scm
+; Takes paper2 as argument. The other 3 variables are ungrounded.
+
+(define (find-common-author-to-paper paper2)
+  (cog-bind
+      (BindLink
+        (ListLink
+            (VariableNode "$paper1")
+            (VariableNode "$person")
+            (VariableNode "$category"))
+        (ImplicationLink
+          (AndLink
+              (EvaluationLink
+                (PredicateNode "wrote")
+                (ListLink
+                  (VariableNode "$person")
+                  (VariableNode "$paper1")))
+              (EvaluationLink
+                (PredicateNode "wrote")
+                (ListLink
+                  (VariableNode "$person")
+                  paper2))
+              (EvaluationLink
+                (PredicateNode "category")
+                (ListLink
+                    (VariableNode "$paper1")
+                    (VariableNode "$category"))))
+          (VariableNode "$paper1")))))
