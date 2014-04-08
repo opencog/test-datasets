@@ -202,6 +202,7 @@
         (VariableNode "$category")))))
 
 (define (find-categorizations)
-    (cog-outgoing-set (cog-bind find-categorizations-result)))
+    (map cog-outgoing-set
+        (cog-outgoing-set (cog-bind find-categorizations-result))))
 
 (define (count-categorizations) (length (find-categorizations)))
