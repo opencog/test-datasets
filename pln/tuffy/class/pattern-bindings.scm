@@ -17,7 +17,7 @@
 ; Categories are entities that participate in the category(paper, category)
 ; relation as the second argument
 
-(define find-categories-duped
+(define find-categories-result
   (BindLink
     (ListLink
         (VariableNode "$paper")
@@ -31,7 +31,7 @@
       (VariableNode "$category"))))
 
 (define (find-categories)
-    (delete-duplicates (cog-outgoing-set (cog-bind find-categories-duped))))
+    (delete-duplicates (cog-outgoing-set (cog-bind find-categories-result))))
 
 (define (count-categories)
     (length (find-categories)))
@@ -43,7 +43,7 @@
 ; People are entities that participate in the wrote(person, paper) relation
 ; as the first argument
 
-(define find-people-duped
+(define find-people-result
   (BindLink
     (ListLink
         (VariableNode "$person")
@@ -57,7 +57,7 @@
       (VariableNode "$person"))))
 
 (define (find-people)
-    (delete-duplicates (cog-outgoing-set (cog-bind find-people-duped))))
+    (delete-duplicates (cog-outgoing-set (cog-bind find-people-result))))
 
 (define (count-people)
     (length (find-people)))
@@ -69,7 +69,7 @@
 ; Papers are entities that participate in the wrote(person, paper) relation
 ; as the second argument
 
-(define find-papers-duped
+(define find-papers-result
   (BindLink
     (ListLink
         (VariableNode "$person")
@@ -83,7 +83,7 @@
       (VariableNode "$paper"))))
 
 (define (find-papers)
-    (delete-duplicates (cog-outgoing-set (cog-bind find-papers-duped))))
+    (delete-duplicates (cog-outgoing-set (cog-bind find-papers-result))))
 
 (define (count-papers)
     (length (find-papers)))
@@ -94,7 +94,7 @@
 ;
 ; Categorized papers are entities that participate in the
 ; category(paper, category) relation as the first argument
-(define find-categorized-papers-duped
+(define find-categorized-papers-result
   (BindLink
     (ListLink
         (VariableNode "$paper")
@@ -109,7 +109,7 @@
 
 (define (find-categorized-papers)
     (delete-duplicates
-        (cog-outgoing-set (cog-bind find-categorized-papers-duped))))
+        (cog-outgoing-set (cog-bind find-categorized-papers-result))))
 
 (define (count-categorized-papers)
     (length (find-categorized-papers)))
@@ -134,7 +134,7 @@
 ; Referral sources are entities that participate in the refers(paper, paper)
 ; relation as the first argument
 
-(define find-referral-sources-duped
+(define find-referral-sources-result
   (BindLink
     (ListLink
         (VariableNode "$paper1")
@@ -149,7 +149,7 @@
 
 (define (find-referral-sources)
     (delete-duplicates
-        (cog-outgoing-set (cog-bind find-referral-sources-duped))))
+        (cog-outgoing-set (cog-bind find-referral-sources-result))))
 
 (define (count-referral-sources)
     (length (find-referral-sources)))
@@ -161,7 +161,7 @@
 ; Referral targets are entities that participate in the refers(paper, paper)
 ; relation as the second argument
 
-(define find-referral-targets-duped
+(define find-referral-targets-result
   (BindLink
     (ListLink
         (VariableNode "$paper1")
@@ -176,6 +176,32 @@
 
 (define (find-referral-targets)
     (delete-duplicates
-        (cog-outgoing-set (cog-bind find-referral-targets-duped))))
+        (cog-outgoing-set (cog-bind find-referral-targets-result))))
 
 (define (count-referral-targets) (length (find-referral-targets)))
+
+; ---------------------------------------------------------------------------
+; find-categorizations
+; count-categorizations
+;
+; Categorizations are instances of the category(paper, category) relation
+
+(define find-categorizations-result
+  (BindLink
+    (ListLink
+        (VariableNode "$paper")
+        (VariableNode "$category"))
+    (ImplicationLink
+      (EvaluationLink
+        (PredicateNode "category")
+        (ListLink
+          (VariableNode "$paper")
+          (VariableNode "$category")))
+      (ListLink
+        (VariableNode "$paper")
+        (VariableNode "$category")))))
+
+(define (find-categorizations)
+    (cog-outgoing-set (cog-bind find-categorizations-result)))
+
+(define (count-categorizations) (length (find-categorizations)))
