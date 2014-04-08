@@ -9,6 +9,7 @@
 ;;     uncategorized-papers
 ;;     referral-sources
 ;;     referral-targets
+;;     categorizations
 
 ; ---------------------------------------------------------------------------
 ; find-categories
