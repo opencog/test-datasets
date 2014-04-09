@@ -417,3 +417,16 @@
 
 (define (apply-rule-2)
     (apply-rule PLNRuleModusPonens unifier-rule-2 (find-uncategorized-papers)))
+
+; ==========================================================================
+; Compile the rule application functions to improve performance
+; ==========================================================================
+
+(define functions-list (list
+    'apply-rule-1
+    'apply-rule-2
+))
+
+(for-each
+	(lambda (f) (compile f #:env (current-module)))
+	functions-list)
