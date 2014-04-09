@@ -10,6 +10,8 @@
 ;;     referral-sources
 ;;     referral-targets
 ;;     categorizations
+;;     authorships
+;;     referrals
 ;;
 ;; Additionally, these find-* queries are defined to assist in variable
 ;; guided chaining:
@@ -225,6 +227,60 @@
 (define (count-categorizations) (length (find-categorizations)))
 
 ; ---------------------------------------------------------------------------
+; find-authorships
+; count-authorships
+;
+; Authorships are instances of the wrote(person, paper) relation
+
+(define find-authorships-result
+  (BindLink
+    (ListLink
+        (VariableNode "$person")
+        (VariableNode "$paper"))
+    (ImplicationLink
+      (EvaluationLink
+        (PredicateNode "wrote")
+        (ListLink
+          (VariableNode "$person")
+          (VariableNode "$paper")))
+      (ListLink
+        (VariableNode "$person")
+        (VariableNode "$paper")))))
+
+(define (find-authorships)
+    (map cog-outgoing-set
+        (cog-outgoing-set (cog-bind find-authorships-result))))
+
+(define (count-authorships) (length (find-authorships)))
+
+; ---------------------------------------------------------------------------
+; find-referrals
+; count-referrals
+;
+; Referrals are instances of the refers(paper1, paper2) relation
+
+(define find-referrals-result
+  (BindLink
+    (ListLink
+        (VariableNode "$paper1")
+        (VariableNode "$paper2"))
+    (ImplicationLink
+      (EvaluationLink
+        (PredicateNode "refers")
+        (ListLink
+          (VariableNode "$paper1")
+          (VariableNode "$paper2")))
+      (ListLink
+        (VariableNode "$paper1")
+        (VariableNode "$paper2")))))
+
+(define (find-referrals)
+    (map cog-outgoing-set
+        (cog-outgoing-set (cog-bind find-referrals-result))))
+
+(define (count-referrals) (length (find-referrals)))
+
+; ---------------------------------------------------------------------------
 ; find-referrals-to-paper
 ;
 ; Matches with rule #2 in prog.scm
@@ -409,8 +465,9 @@
 ; apply-rule-2
 ;
 ; Defines shortcut functions that will call the generic rule engine rule
-; application function with the available rules, unifying each uncategorized
-; paper against the template for the corresponding rule
+; application function with the available rules, grounding each uncategorized
+; paper against the template for the corresponding rule and applying the rule
+; to the unifiers that are found
 
 (define (apply-rule-1)
     (apply-rule PLNRuleModusPonens unifier-rule-1 (find-uncategorized-papers)))
