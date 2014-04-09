@@ -16,6 +16,14 @@
 ;;
 ;;     find-referrals-to-paper
 ;;     find-common-author-to-paper
+;;
+;; Unifiers are created for the rules:
+;;
+;;     unifier-rule-2
+;;
+;; Then, the following rule application commands are defined:
+;;
+;;     apply-rule-2
 
 ; ---------------------------------------------------------------------------
 ; find-categories
@@ -273,3 +281,79 @@
                     (VariableNode "$paper1")
                     (VariableNode "$category"))))
           (VariableNode "$paper1")))))
+
+; ===========================================================================
+; Rule definitions
+; ===========================================================================
+
+; ---------------------------------------------------------------------------
+; unifer-rule-2
+;
+; Variable unifier for rule #2 in prog.scm
+; Takes paper2 as argument. The other 2 variables are ungrounded.
+; Returns a list of ImplicationLinks for ModusPonens to use as input for a
+; given paper
+
+(define (unifier-rule-2 paper2)
+    (cog-bind
+        (BindLink
+            (ListLink
+                (VariableNode "$paper1")
+                (VariableNode "$category"))
+            (ImplicationLink
+
+                ;; Rule #2 antecedent
+                ;; Pattern to unify
+                (AndLink
+                    (EvaluationLink
+                        (PredicateNode "refers")
+                        (ListLink
+                            (VariableNode "$paper1")
+                            paper2))
+                    (EvaluationLink
+                        (PredicateNode "category")
+                        (ListLink
+                            (VariableNode "$paper1")
+                            (VariableNode "$category"))))
+
+                ;; Create instantiations of rule #2 that will be the input
+                ;; for ModusPonens
+                (ImplicationLink (stv 0.88080 1)
+                    ; Note: AndCreationRule is omitted here for simplicity
+                    ; since in this example the truth value of the AndLink
+                    ; will simply be (stv 1 1)
+                    (AndLink (stv 1 1)
+                        (EvaluationLink
+                            (PredicateNode "refers")
+                            (ListLink
+                                (VariableNode "$paper1")
+                                paper2))
+                        (EvaluationLink
+                            (PredicateNode "category")
+                            (ListLink
+                                (VariableNode "$paper1")
+                                (VariableNode "$category"))))
+                    (EvaluationLink
+                        (PredicateNode "category")
+                        (ListLink
+                            paper2
+                            (VariableNode "$category"))))))))
+
+; ---------------------------------------------------------------------------
+; apply-rule-2
+;
+; Applies ModusPonens to rule #2
+
+
+;; Apply ModusPonens to all the uncategorized papers using rule #2
+(define (apply-rule-2)
+    (map
+        (lambda (x)
+            (let ((unifications (unifier-rule-2 x)))
+                ; Check if there are any results from unification
+                (if (> 0 (length (cog-outgoing-set unifications)))
+                    (map
+                        (lambda (unification)
+                            (PLNRuleModusPonens (unification))) ; Apply rule #2
+                        (unifications))))) ; To each unifier
+        (find-uncategorized-papers))) ; For each uncategorized paper
