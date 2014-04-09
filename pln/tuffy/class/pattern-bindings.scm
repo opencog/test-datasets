@@ -19,10 +19,12 @@
 ;;
 ;; Unifiers are created for the rules:
 ;;
+;;     unifier-rule-1
 ;;     unifier-rule-2
 ;;
-;; Then, the following rule application commands are defined:
+;; Then, the following rule application shortcuts are defined:
 ;;
+;;     apply-rule-1
 ;;     apply-rule-2
 
 ; ---------------------------------------------------------------------------
@@ -287,6 +289,69 @@
 ; ===========================================================================
 
 ; ---------------------------------------------------------------------------
+; unifer-rule-1
+; Variable unifier for rule #1 in prog.scm
+; Takes paper2 as argument. The other 3 variables are ungrounded.
+; Returns a list of ImplicationLinks for ModusPonens to use as input for a
+; given paper
+
+(define (unifier-rule-1 paper2)
+    (cog-bind
+        (BindLink
+            (ListLink
+                (VariableNode "$paper1")
+                (VariableNode "$person1")
+                (VariableNode "$category"))
+            (ImplicationLink
+
+                ;; Rule #1 antecedent
+                ;; Pattern to unify
+                (AndLink
+                    (EvaluationLink
+                        (PredicateNode "wrote")
+                        (ListLink
+                            (VariableNode "$person1")
+                            (VariableNode "$paper1")))
+                    (EvaluationLink
+                        (PredicateNode "wrote")
+                        (ListLink
+                            (VariableNode "$person1")
+                            paper2))
+                    (EvaluationLink
+                        (PredicateNode "category")
+                        (ListLink
+                            (VariableNode "$paper1")
+                            (VariableNode "$category"))))
+
+                ;; Create instantiations of rule #1 that will be the input
+                ;; for ModusPonens
+                (ImplicationLink (stv 0.73106 1)
+                    ; Note: AndCreationRule is omitted here for simplicity
+                    ; since in this example the truth value of the AndLink
+                    ; will simply be (stv 1 1)
+                    (AndLink (stv 1 1)
+                        (EvaluationLink
+                            (PredicateNode "wrote")
+                            (ListLink
+                                (VariableNode "$person1")
+                                (VariableNode "$paper1")))
+                        (EvaluationLink
+                            (PredicateNode "wrote")
+                            (ListLink
+                                (VariableNode "$person1")
+                                paper2))
+                        (EvaluationLink
+                            (PredicateNode "category")
+                            (ListLink
+                                (VariableNode "$paper1")
+                                (VariableNode "$category"))))
+                    (EvaluationLink
+                        (PredicateNode "category")
+                        (ListLink
+                            paper2
+                            (VariableNode "$category"))))))))
+
+; ---------------------------------------------------------------------------
 ; unifer-rule-2
 ;
 ; Variable unifier for rule #2 in prog.scm
@@ -340,20 +405,15 @@
                             (VariableNode "$category"))))))))
 
 ; ---------------------------------------------------------------------------
+; apply-rule-1
 ; apply-rule-2
 ;
-; Applies ModusPonens to rule #2
+; Defines shortcut functions that will call the generic rule engine rule
+; application function with the available rules, unifying each uncategorized
+; paper against the template for the corresponding rule
 
+(define (apply-rule-1)
+    (apply-rule PLNRuleModusPonens unifier-rule-1 (find-uncategorized-papers)))
 
-;; Apply ModusPonens to all the uncategorized papers using rule #2
 (define (apply-rule-2)
-    (map
-        (lambda (x)
-            (let ((unifications (unifier-rule-2 x)))
-                ; Check if there are any results from unification
-                (if (> 0 (length (cog-outgoing-set unifications)))
-                    (map
-                        (lambda (unification)
-                            (PLNRuleModusPonens (unification))) ; Apply rule #2
-                        (unifications))))) ; To each unifier
-        (find-uncategorized-papers))) ; For each uncategorized paper
+    (apply-rule PLNRuleModusPonens unifier-rule-2 (find-uncategorized-papers)))
