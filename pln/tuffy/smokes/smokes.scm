@@ -5,9 +5,8 @@
 ;;; https://github.com/cosmoharrigan/tuffy/tree/master/samples/smoke
 ;;; http://hazy.cs.wisc.edu/hazy/tuffy/doc/tuffy-manual.pdf
 
+;;; --------------------------------------------------------------------------
 ;;; prog.mln
-
-(cog-set-af-boundary! 1)
 
 ;; Evidence and query predicates and concepts:
 
@@ -31,11 +30,11 @@
 
 ; Version #1
 (ImplicationLink (stv 0.6225 1.0)
-    (EvaluationLink (stv 1.0 0.0)
+    (EvaluationLink
         smokes
         (ListLink
             (VariableNode "$X")))
-    (EvaluationLink (stv 1.0 0.0)
+    (EvaluationLink
         cancer
         (ListLink
             (VariableNode "$X"))))
@@ -47,44 +46,36 @@
 
 ; Version #3
 (ImplicationLink (stv 0.5987 1.0)
-    (EvaluationLink (stv 1.0 0.0)
+    (EvaluationLink
         friends
         (ListLink
             (VariableNode "$X")
             (VariableNode "$Y")))
-    (AndLink
-        (ImplicationLink
-            (EvaluationLink (stv 1.0 0.0)
-                smokes
-                (ListLink
-                    (VariableNode "$X")))
-            (EvaluationLink (stv 1.0 0.0)
-                smokes
-                (ListLink
-                    (VariableNode "$Y"))))
-        (ImplicationLink
-            (EvaluationLink (stv 1.0 0.0)
-                smokes
-                (ListLink
-                    (VariableNode "$Y")))
-            (EvaluationLink (stv 1.0 0.0)
-                smokes
-                (ListLink
-                    (VariableNode "$X"))))))
+    (ImplicationLink
+        (EvaluationLink
+            smokes
+            (ListLink
+                (VariableNode "$X")))
+        (EvaluationLink
+            smokes
+            (ListLink
+                (VariableNode "$Y")))))
 
 ; If X and Y are friends, then Y and X are friends.
+; Note: this is not currently used.
 (EquivalenceLink (stv 1.0 1.0)
-    (EvaluationLink (stv 1.0 0.0)
+    (EvaluationLink
         friends
         (ListLink
             (VariableNode "$X")
             (VariableNode "$Y")))
-    (EvaluationLink (stv 1.0 0.0)
+    (EvaluationLink
         friends
         (ListLink
             (VariableNode "$Y")
             (VariableNode "$X"))))
 
+;;; --------------------------------------------------------------------------
 ;;; evidence.db
 
 ; Anna and Bob are friends.
@@ -118,7 +109,7 @@
         Gary
         Helen))
 
-;; Note: the 'non-friendships' are not explicitly defined in this version of the file
+;; Note: the 'non-friendships' are not explicitly defined in this version
 
 ; Anna smokes.
 (EvaluationLink (stv 1.0 1.0)
@@ -131,6 +122,7 @@
     (ListLink
         Edward))
 
+;;; --------------------------------------------------------------------------
 ;;; query.db
 
 ; Who has cancer?
@@ -140,20 +132,8 @@
         (ListLink
             (VariableNode "$hasCancer"))))
 
-(define query
-    (EvaluationLink
-        (PredicateNode "query")
-        (ListLink
-            hasCancer)))
-
-(define rules
-    (EvaluationLink
-        (PredicateNode "rules")
-        (ListLink
-            (ConceptNode "DeductionRule")
-            (ConceptNode "EvaluationToMemberRule")
-            (ConceptNode "MemberToEvaluationRule")
-            (ConceptNode "MemberToInheritanceRule")
-            (ConceptNode "InheritanceToMemberRule"))))
+;;; --------------------------------------------------------------------------
+;;; Attention allocation configuration
 
 (cog-set-av! cancer (av 1000 0 0))
+(cog-set-af-boundary! 1)
