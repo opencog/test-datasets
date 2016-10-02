@@ -1,6 +1,11 @@
 # Human Ontology and Human Gene Annotation Databases
 
-Data files are available at http://buildbot.opencog.org/downloads/
+Source (Scheme .scm) data files are available at http://buildbot.opencog.org/downloads/
+
+Neo4j database dumps (xz-compressed) are available at:
+
+1. [go.neo4j.tar.xz](https://drive.google.com/file/d/0B9dx38a6NVxKeE11bmh3ZGpRVFk/view?usp=sharing)
+2. [go_annotation.neo4j.tar.xz](https://drive.google.com/file/d/0B9dx38a6NVxKUHN5ZmlTN2Q2YVk/view?usp=sharing)
 
 ## Converting Human Ontology Database to Scheme File
 
